@@ -1,11 +1,15 @@
 # FASRGAN_and_Fs-SRGAN
 Fine-grained Attention and Feature-sharingGenerative Adversarial Networksfor Single Image Super-Resolution
 
+## Result and code
+We will upload our super-resolution results after we order the results.
+The code will be released upon the acceptance of the paper.
+
 ## Slide 
 **FASRGAN-and-Fs-SRGAN** is the slide of our method. You can also download it from [Link](https://github.com/Rainyfish/FASRGAN_and_Fs-SRGAN/blob/master/FASRGAN-and-Fs-SRGAN.pptx)
 
 
-## Results
+## Experiment comparisons
 ### Quantitative comparisons on Urban100 between our methods and state-of-the-art methods
 ![Q_1](https://github.com/Rainyfish/FASRGAN_and_Fs-SRGAN/blob/master/Figure/PI_RMSE.png)
 
