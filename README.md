@@ -2,7 +2,7 @@
 Fine-grained Attention and Feature-sharingGenerative Adversarial Networksfor Single Image Super-Resolution
 
 ## Result and code
-We will upload our super-resolution results after we order the results.
+The super-resolution results of our models can be download at [Link](https://pan.baidu.com/s/16XF1_-DsWv9r6qbm-cE9mw), and the extracted code is "5lpi".
 The code will be released upon the acceptance of the paper.
 
 ## Slide 
