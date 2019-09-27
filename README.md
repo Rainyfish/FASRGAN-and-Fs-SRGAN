@@ -5,8 +5,6 @@ Fine-grained Attention and Feature-sharingGenerative Adversarial Networksfor Sin
 The super-resolution results of our models can be download at [Link](https://pan.baidu.com/s/16XF1_-DsWv9r6qbm-cE9mw), and the extracted code is "5lpi".
 The code will be released upon the acceptance of the paper.
 
-## Slide 
-**FASRGAN-and-Fs-SRGAN** is the slide of our method. You can also download it from [Link](https://github.com/Rainyfish/FASRGAN-and-Fs-SRGAN/blob/master/FASRGAN-and-Fs-SRGAN.pptx)
 
 ## Experiment comparisons
 ### Quantitative comparisons on Urban100 between our methods and state-of-the-art methods
