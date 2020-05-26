@@ -1,5 +1,5 @@
 # FASRGAN_and_Fs-SRGAN
-Fine-grained Attention and Feature-sharingGenerative Adversarial Networksfor Single Image Super-Resolution
+Fine-grained Attention and Feature-sharing Generative Adversarial Networksfor Single Image Super-Resolution
 
 ## Result and code
 The super-resolution results of our models can be download at [Link](https://pan.baidu.com/s/16XF1_-DsWv9r6qbm-cE9mw), and the extracted code is "5lpi".
