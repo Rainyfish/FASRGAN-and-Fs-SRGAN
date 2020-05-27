@@ -1,8 +1,8 @@
 # Fine-grained Attention and Feature-sharing Generative Adversarial Networksfor Single Image Super-Resolution
 ## Contents
-1. [Proposed Methods](#1=Proposed-Methods)<br>
-2. [Results and codes](#2-Results-and-codes)<br>
-3. [Experiment comparisons](#3-Experiment-comparisons)<br>
+1. [Proposed Methods](#Proposed-Methods)<br>
+2. [Results and codes](#Results-and-codes)<br>
+3. [Experiment comparisons](#Experiment-comparisons)<br>
 
 
 ## 1.Proposed Methods
@@ -36,7 +36,7 @@ Download the results of our methods at [Baidu Netdisk](https://pan.baidu.com/s/1
 
 ![bicubic-degradation](Figure/Bic-results.png)
 
-### The trade-off of RMSE and LPIPS on Urban100 of our methods and the state-of-the-art methods for $4\times$ super-resolution
+### The trade-off of RMSE and LPIPS on Urban100 of our methods and the state-of-the-art methods for 4x super-resolution
 
 ![LPIPS_RMSE](Figure/LPIPS_RMSE.png)
 
