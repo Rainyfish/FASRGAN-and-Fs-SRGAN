@@ -1,8 +1,8 @@
 # Fine-grained Attention and Feature-sharing Generative Adversarial Networksfor Single Image Super-Resolution
 ## Contents
-1. [Proposed Methods](#1.Proposed-Methods)<br>
-2. [Results and codes](#2.Results-and-codes)<br>
-3. [Experiment comparisons](#3.Experiment-comparisons)<br>
+1. [Proposed Methods](#1=Proposed-Methods)<br>
+2. [Results and codes](#2-Results-and-codes)<br>
+3. [Experiment comparisons](#3-Experiment-comparisons)<br>
 
 
 ## 1.Proposed Methods
