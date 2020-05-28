@@ -1,8 +1,9 @@
 # Fine-grained Attention and Feature-sharing Generative Adversarial Networksfor Single Image Super-Resolution
+[Paper](https://arxiv.org/abs/1911.10773)
 ## Contents
-1. [Proposed Methods](#Proposed-Methods)<br>
-2. [Results and codes](#Results-and-codes)<br>
-3. [Experiment comparisons](#Experiment-comparisons)<br>
+1. [Proposed Methods](#Proposed\ Methods)
+2. [Results and codes](#Results\ and\ codes)
+3. [Experiment comparisons](#Experiment\ comparisons)
 
 
 ## 1.Proposed Methods
@@ -36,7 +37,7 @@ Download the results of our methods at [Baidu Netdisk](https://pan.baidu.com/s/1
 
 ![bicubic-degradation](Figure/Bic-results.png)
 
-### The trade-off of RMSE and LPIPS on Urban100 of our methods and the state-of-the-art methods for 4x super-resolution
+### The trade-off of RMSE and LPIPS on Urban100 of our methods and the state-of-the-art methods for $4\times$ super-resolution
 
 ![LPIPS_RMSE](Figure/LPIPS_RMSE.png)
 
@@ -54,5 +55,16 @@ Download the results of our methods at [Baidu Netdisk](https://pan.baidu.com/s/1
 
 ![Q_1](Figure/resnet-50.png)
 
+## Citation
+If you find this repository useful for your research, please use the following.
+```
+  @article{Yan2019FinegrainedAA,
+  title={Fine-grained Attention and Feature-sharing Generative Adversarial Networks for Single Image Super-Resolution},
+  author={Yitong Yan and Chuangchuang Liu and Changyou Chen and Xianfang Sun and Longcun Jin and Xiaodong Zhou},
+  journal={ArXiv},
+  year={2019},
+  volume={abs/1911.10773}
+```
 
-
+## Acknowledgements
+The repository is built on the [BasicSR](https://github.com/xinntao/BasicSR) repository.
