@@ -1,4 +1,4 @@
-# Fine-grained Attention and Feature-sharing Generative Adversarial Networksfor Single Image Super-Resolution
+# Fine-grained Attention and Feature-sharing Generative Adversarial Networks for Single Image Super-Resolution
 [Paper](https://arxiv.org/abs/1911.10773)
 ## Contents
 1. [Proposed Methods](#Proposed\ Methods)
