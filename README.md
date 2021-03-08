@@ -30,7 +30,7 @@ You can use the codes in Test_scripts to calculate the PSNR/SSIM/PI/LPIPS:
 ### Source code and models
 The codes of model are defined in /codes/models. 
 
-And the pre-trained models lay in /experimens/pretrained_models
+And the pre-trained models can be downloaded from  [Baidu Netdisk](https://pan.baidu.com/s/1gIUYaDXBRY1IA5WJ2f8Otg) (code: 723l) or [Google drive](https://drive.google.com/file/d/1LodToiw66jVR-QSsWwgjYzE7PEMUMkAj/view?usp=sharing).
 
 ### How to train
 python train.py -opt /options/train/train_FASRGAN.json
