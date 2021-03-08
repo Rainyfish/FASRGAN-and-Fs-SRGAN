@@ -1,13 +1,14 @@
 # Fine-grained Attention and Feature-sharing Generative Adversarial Networks for Single Image Super-Resolution
-[Paper](https://arxiv.org/abs/1911.10773)
+This [Paper](https://arxiv.org/abs/1911.10773) has been accepted for publication on IEEE Transaction on Multi-media. 
+
 ## Contents
-1. [Proposed Methods](#Proposed\ Methods)
-2. [Results and codes](#Results\ and\ codes)
-3. [Experiment comparisons](#Experiment\ comparisons)
+1. [Proposed Methods](#Proposed-Methods)
+2. [Results and codes](#Results-and-codes)
+3. [Experiment comparisons](#Experiment-comparisons)
 
 
 ## 1.Proposed Methods
-We propose two novel techniques in the generative adversarial networks to produce photo-realistic images for image super-resolution. 
+We propose two novel techniques in the generative adversarial networks to produce photo-realistic images for image super-resolution in this paper. 
 ### FASRGAN
 Instead of producing a single score to discriminate images between real and fake, we propose a variant, called Fine-grained Attention Generative Adversarial Network for image super-resolution (FASRGAN), to discriminate each pixel between real and fake.  
 ![U-net](Figure/U-net.png)
@@ -19,7 +20,7 @@ Instead of using different networks for the generator and the discriminator in t
 
 ### How the evaluate the results
 We evaluated our methods on several datasets in terms of PSNR/SSIM/PI/LPIPS, where PSNR/SSIM are used to evaluation the accuracy of SR images, and PI/LPIPS are adopted to evaluate the perceptual quality.
-Perceptual Index (PI) is used in The PIRM Challenge on Perceptual Super-Resolution, and Learned Perceptual Image Patch Similarity (LPIPS) metric is proposed in the work, The Unreasonable Effectiveness of Deep Features as a Perceptual Metric, evaluating the distance between image patches. Both of them with lower value means more similar. 
+Perceptual Index (PI) is used in The PIRM Challenge on Perceptual Super-Resolution, and Learned Perceptual Image Patch Similarity (LPIPS) metric is proposed in the work "The Unreasonable Effectiveness of Deep Features as a Perceptual Metric", which evaluates the distance between image patches. Both of them with lower value means more similar. 
 
 You can use the codes in Test_scripts to calculate the PSNR/SSIM/PI/LPIPS: 
 1. Download the results of our methods at [Baidu Netdisk](https://pan.baidu.com/s/19X15RgbF0DIvkTBokx603w) (code: 6q7p) or [Google drive](https://drive.google.com/open?id=12286mQ-Lq_4HoGPdsMQk2F9DmmnAQAv8).
@@ -27,7 +28,17 @@ You can use the codes in Test_scripts to calculate the PSNR/SSIM/PI/LPIPS:
 3. Run the scripts in Test_scripts for testing.
 
 ### Source code and models
-The codes and pre-trained models will be released upon the acceptance of the paper.
+The codes of model are defined in /codes/models. 
+
+And the pre-trained models lay in /experimens/pretrained_models
+
+### How to train
+python train.py -opt /options/train/train_FASRGAN.json
+python train.py -opt /options/train/train_FsSRGAN.json
+
+### How to test
+python test.py -opt /options/test/test_FASRGAN.json
+python test.py -opt /options/test/test_FsSRGAN.json
 
 <!-- ### Pre-trained models
 Download the results of our methods at [Baidu Netdisk](https://pan.baidu.com/s/16XF1_-DsWv9r6qbm-cE9mw) or [Google drive](https://drive.google.com/drive/folders/1OVFJAa89SKt-wfMqpGPiNW2E3qN55tc1?usp=sharing)). -->

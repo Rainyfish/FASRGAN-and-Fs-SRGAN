@@ -121,6 +121,7 @@ def main():
             if current_step % opt['train']['val_freq'] == 0:
                 avg_psnr = 0.0
                 idx = 0
+                avg_lpips = 0.0
                 for val_data in val_loader:
                     idx += 1
                     img_name = os.path.splitext(os.path.basename(val_data['LR_path'][0]))[0]
@@ -134,6 +135,13 @@ def main():
                     visuals = model.get_current_visuals()
                     sr_img = util.tensor2img(visuals['SR'])  # uint8
                     gt_img = util.tensor2img(visuals['HR'])  # uint8
+
+                    if opt['val_lpips']:
+                        lpips = visuals['LPIPS']
+                        avg_lpips += lpips
+                        print('img:', val_data['HR_path'][0].split('/')[-1], 'LPIPS: %.4f' % lpips.numpy())
+                    else:
+                        print('img:', val_data['HR_path'][0].split('/')[-1])
 
                     # Save SR images for reference
                     save_img_path = os.path.join(img_dir, '{:s}_{:d}.png'.format(\
@@ -149,21 +157,34 @@ def main():
                     avg_psnr += util.calculate_psnr(cropped_sr_img * 255, cropped_gt_img * 255)
 
                 avg_psnr = avg_psnr / idx
+                if opt['val_lpips']:
+                    avg_lpips = avg_lpips / idx
+                    print('Mean LPIPS:', avg_lpips.numpy())
 
                 # log
                 logger.info('# Validation # PSNR: {:.4e}'.format(avg_psnr))
                 logger_val = logging.getLogger('val')  # validation logger
-                logger_val.info('<epoch:{:3d}, iter:{:8,d}> psnr: {:.4e}'.format(
-                    epoch, current_step, avg_psnr))
-                # tensorboard logger
+                if opt['val_lpips']:
+                    logger_val.info('<epoch:{:3d}, iter:{:8,d}> psnr: {:.4e}, LPIPS: {:.4f}'.format(
+                        epoch, current_step, avg_psnr, avg_lpips))
+                else:
+                    logger_val.info('<epoch:{:3d}, iter:{:8,d}> psnr: {:.4e}'.format(
+                        epoch, current_step, avg_psnr))
+                # tensorboard logger (psnr + lpips)
                 if opt['use_tb_logger'] and 'debug' not in opt['name']:
                     tb_logger.add_scalar('psnr', avg_psnr, current_step)
+                    tb_logger.add_scalar('LPIPS', avg_lpips, current_step)
+                # logger_val.info('<epoch:{:3d}, iter:{:8,d}> psnr: {:.4e}'.format(
+                    # epoch, current_step, avg_psnr))
+                # # tensorboard logger
+                # if opt['use_tb_logger'] and 'debug' not in opt['name']:
+                #     tb_logger.add_scalar('psnr', avg_psnr, current_step)
 
             # save models and training states
             if current_step % opt['logger']['save_checkpoint_freq'] == 0:
                 logger.info('Saving models and training states.')
                 model.save(current_step)
-                # model.save_training_state(epoch, current_step)
+                model.save_training_state(epoch, current_step)
 
     logger.info('Saving the final model.')
     model.save('latest')
