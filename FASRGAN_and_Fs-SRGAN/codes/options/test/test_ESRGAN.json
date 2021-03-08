@@ -1,0 +1,53 @@
+{
+  "name": "602_RRDB_ESRGAN_x4"
+  , "suffix": ""
+  , "model": "srragan"
+  , "scale": 4
+  , "val_lpips": true
+  ,"gpu_ids": [0]
+
+  , "datasets": {
+//      "test_1": { // the 1st test dataset
+//      "name": "ImageNet"
+//      , "mode": "LRHR"
+//      , "dataroot_HR": "/media/lcc/Seagate Expansion Drive/Imagenet/imageNet_SR_HR/"
+//      , "dataroot_LR": "/media/lcc/Seagate Expansion Drive/Imagenet/imageNet_SR_LR/"
+//    }
+    "test_1": { // the 1st test dataset
+      "name": "set5"
+      , "mode": "LRHR"
+      , "dataroot_HR": "/home/yyt/benchmark/PIRM/PIRM_Test"
+      , "dataroot_LR": "/home/yyt/benchmark/PIRM/PIRM_Test_LR"
+    }
+    , "test_2": { // the 2nd test dataset
+      "name": "Set14"
+      , "mode": "LRHR"
+      , "dataroot_HR": "/home/yyt/benchmark/Set14/HR"
+//      , "dataroot_LR": "/mnt/SSD/xtwang/BasicSR_datasets/val_set14/Set14_bicLRx4"
+    }
+    , "test_3": { // the 2nd test dataset
+      "name": "Urban100"
+      , "mode": "LRHR"
+      , "dataroot_HR": "/home/yyt/benchmark/Urban100/HR"
+//      , "dataroot_LR": "/mnt/SSD/xtwang/BasicSR_datasets/val_set14/Set14_bicLRx4"
+    }
+  }
+
+  , "path": {
+    "root": "/home/yyt/Python/FASRGAN-and-Fs-SRGAN-master/FASRGAN_and_Fs-SRGAN/"
+    , "pretrain_model_G": "../experiments/529_RRDB_ESRGAN_x4_17_RRDB128/models/275000_G.pth"
+  }
+
+  , "network_G": {
+    "which_model_G": "RRDB_net" // RRDB_net | sr_resnet
+    , "norm_type": null
+    , "mode": "CNA"
+    , "nf": 64
+    , "nb": 17
+    , "in_nc": 3
+    , "out_nc": 3
+
+    , "gc": 32
+    , "group": 1
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "name": "1102_RRDB_FASRGAN"
+  , "suffix": ""
+  , "model": "FASRGAN"
+  , "scale": 4
+  , "gpu_ids": [0]
+  , "val_lpips": true
+
+  , "datasets": {
+     "test_1": { // the 2nd test dataset
+      "name": "Set5"
+      , "mode": "LRHR"
+      , "dataroot_HR": "/home/yyt/benchmark/Set5/HR"
+      , "dataroot_LR": "/home/yyt/benchmark/Set5/LR_bicubic/X4"
+    }
+    ,"test_2": { // the 2nd test dataset
+        "name": "Set14"
+        , "mode": "LRHR"
+        , "dataroot_HR": "/home/yyt/benchmark/Set14/HR"
+        , "dataroot_LR": "/home/yyt/benchmark/Set14/LR_bicubic/X4"
+    }
+    , "test_3": { // the 2nd test dataset
+        "name": "Urban100"
+        , "mode": "LRHR"
+        , "dataroot_HR": "/home/yyt/benchmark/Urban100/HR"
+        , "dataroot_LR": "/home/yyt/benchmark/Urban100/LR_bicubic/X4"
+    }
+    , "test_4": { // the 2nd test dataset
+        "name": "B100"
+        , "mode": "LRHR"
+        , "dataroot_HR": "/home/yyt/benchmark/B100/HR"
+        , "dataroot_LR": "/home/yyt/benchmark/B100/LR_bicubic/X4"
+    }
+    , "test_5": { // the 2nd test dataset
+      "name": "Manga109"
+      , "mode": "LRHR"
+      , "dataroot_HR": "/home/yyt/benchmark/Manga109/HR"
+      , "dataroot_LR": "/home/yyt/benchmark/Manga109/LR_bicubic/X4"
+    }
+     , "test_6": { // the 2nd test dataset
+        "name": "DIV2K_valid"
+        , "mode": "LRHR"
+        , "dataroot_HR": "/home/yyt/benchmark/DIV2K/HR"
+        , "dataroot_LR": "/home/yyt/benchmark/DIV2K/LR_bicubic/X4"
+    }
+  }
+
+  , "path": {
+    "root": "/home/yyt/Python/FASRGAN-and-Fs-SRGAN-master/FASRGAN_and_Fs-SRGAN"
+    , "pretrain_model_G": "../experiments/pretrianed_models/FASRGAN/FASRGAN_G.pth"
+  }
+  , "network_G": {
+    "which_model_G": "RRDB_net" // sr_resnet
+    , "norm_type": null
+    , "mode": "CNA"
+    , "nf": 64
+    , "nb": 23
+    , "in_nc": 3
+    , "out_nc": 3
+  }
+}

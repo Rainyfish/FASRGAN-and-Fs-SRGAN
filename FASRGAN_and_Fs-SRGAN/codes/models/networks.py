@@ -11,6 +11,8 @@ import models.modules.rcan_g as rcan_g
 import models.modules.DualSR as DualSR
 import models.modules.DualSR_SR as DualSR_SR
 import models.modules.DualSR_RRDB as DualSR_RRDB
+import models.modules.amsrn as AMSRN
+
 logger = logging.getLogger('base')
 ####################
 # initialize
@@ -102,43 +104,22 @@ def define_G(opt):
         netG = arch.RRDBNet(in_nc=opt_net['in_nc'], out_nc=opt_net['out_nc'], nf=opt_net['nf'],
             nb=opt_net['nb'], gc=opt_net['gc'], upscale=opt_net['scale'], norm_type=opt_net['norm_type'],
             act_type='leakyrelu', mode=opt_net['mode'], upsample_mode='upconv')
+
     #define the ex_G
     elif which_model == 'RRDBNet_G':
         netG = arch.RRDBNet(in_nc=opt_net['nf'], out_nc=opt_net['out_nc'], nf=opt_net['nf'],
                             nb=opt_net['nb'], gc=opt_net['gc'], upscale=opt_net['scale'],
                             norm_type=opt_net['norm_type'],
                             act_type='leakyrelu', mode=opt_net['mode'], upsample_mode='upconv')
+
+    elif which_model == 'sr_resnet_G':
+        netG = arch.SRResNet(in_nc=opt_net['nf'], out_nc=opt_net['out_nc'], nf=opt_net['nf'], \
+            nb=opt_net['nb'], upscale=opt_net['scale'], norm_type=opt_net['norm_type'], \
+            act_type='relu', mode=opt_net['mode'], upsample_mode='pixelshuffle')
+
     elif which_model =='RCAN_G':
         netG =rcan_g.RCAN_G(n_resblocks=opt_net['n_resblocks'], n_resgroups=opt_net['n_resgroups'],
                             n_feats=opt_net['n_feats'], reduction=16, scale=4, n_colors=3, rgb_range=255, res_scale=1)
-    elif which_model == 'DualSR_RCAN':
-        #def __init__(self, n_resblocks, n_resgroups_mask, n_resgroups_share, n_resgroups_high_1, n_resgroups_high_2,
-        #            n_resgroups_low1, n_resgroups_low2, n_feats, reduction, scale, n_colors, rgb_range, res_scale,
-        #            conv=common.default_conv):
-
-        netG =DualSR.DualSR(n_resblocks=opt_net['n_resblocks'], n_resgroups_mask=opt_net['n_resgroups_mask'],\
-                                n_resgroups_share=opt_net['n_resgroups_share'], n_resgroups_high_1=opt_net['n_resgroups_high_1'], \
-                                n_resgroups_high_2=opt_net['n_resgroups_high_2'], n_resgroups_low_1=opt_net['n_resgroups_low_1'], \
-                                n_resgroups_low_2=opt_net['n_resgroups_low_2'],\
-                                n_feats=opt_net['n_feats'], reduction=16, scale=4, n_colors=3, rgb_range=255, res_scale=1)
-    elif which_model == 'DualSR_SR':
-        # def __init__(self, n_resblocks, n_resgroups_mask, n_resgroups_share, n_resgroups_high_1, n_resgroups_high_2,
-        #            n_resgroups_low1, n_resgroups_low2, n_feats, reduction, scale, n_colors, rgb_range, res_scale,
-        #            conv=common.default_conv):
-
-        netG = DualSR_SR.DualSR_SR(n_resblocks=opt_net['n_resblocks'], n_resgroups_mask=opt_net['n_resgroups_mask'], \
-                             n_resgroups_share=opt_net['n_resgroups_share'],
-                             n_resgroups_high_1=opt_net['n_resgroups_high_1'], \
-                             n_resgroups_high_2=opt_net['n_resgroups_high_2'],
-                             n_resgroups_low_1=opt_net['n_resgroups_low_1'], \
-                             n_resgroups_low_2=opt_net['n_resgroups_low_2'], \
-                             n_feats=opt_net['n_feats'], reduction=16, scale=4, n_colors=3, rgb_range=255, res_scale=1)
-    elif which_model=='DualSR_RRDB':
-        netG = DualSR_RRDB.DualSR_RRDB(in_nc=opt_net['in_nc'], out_nc=opt_net['out_nc'], nf=opt_net['nf'],
-                            nb_l_1=opt_net['nb_l_1'],nb_l_2=opt_net['nb_l_2'],nb_h_1=opt_net['nb_h_1'],nb_e=opt_net['nb_e'],
-                            nb_h_2=opt_net['nb_h_2'],nb_m=opt_net['nb_m'], gc=opt_net['gc'], upscale=opt_net['scale'],
-                            norm_type=opt_net['norm_type'],
-                            act_type='leakyrelu', mode=opt_net['mode'], upsample_mode='upconv')
 
     else:
         raise NotImplementedError('Generator model [{:s}] not recognized'.format(which_model))
@@ -161,7 +142,12 @@ def define_E(opt):
             nb=opt_net['nb'], gc=opt_net['gc'], upscale=opt_net['scale'], norm_type=opt_net['norm_type'],
             act_type='leakyrelu', mode=opt_net['mode'], upsample_mode='upconv')
     elif which_model =='RCAN_E':
-        netE =rcan_e.RCAN_E(n_resblocks=opt_net['n_resblocks'], n_resgroups=opt_net['n_resgroups'], n_feats=opt_net['n_feats'], reduction=16, scale=4, n_colors=3, rgb_range=255, res_scale=1)
+        netE =rcan_e.RCAN_E(n_resblocks=opt_net['n_resblocks'], n_resgroups=opt_net['n_resgroups'],
+            n_feats=opt_net['n_feats'], reduction=16, scale=4, n_colors=3, rgb_range=255, res_scale=1)
+    elif which_model == 'model_ex_rb':
+        netE = arch.model_ex_rb(in_nc=opt_net['in_nc'], out_nc=opt_net['out_nc'], nf=opt_net['nf'], \
+            nb=opt_net['nb'], upscale=opt_net['scale'], norm_type=opt_net['norm_type'], \
+            act_type='relu', mode=opt_net['mode'], upsample_mode='pixelshuffle')
     else:
         raise NotImplementedError('Discriminator model [{:s}] not recognized'.format(which_model))
     init_weights(netE, init_type='kaiming', scale=1)
@@ -194,6 +180,7 @@ def define_D(opt):
         netD = arch.Discriminator_VGG_128_SN()
     elif which_model=='Unet':
         netD = arch.UNet()
+
     #define the ex_d
     elif which_model=='discriminator_vgg_192_ex':
         netD = arch.Discriminator_VGG_192(in_nc=opt_net['nf'], base_nf=opt_net['nf'], \

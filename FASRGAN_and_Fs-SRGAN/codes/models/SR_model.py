@@ -7,6 +7,7 @@ import torch.nn as nn
 from torch.optim import lr_scheduler
 
 import models.networks as networks
+from models.modules.loss import PerceptualLoss
 from .base_model import BaseModel
 
 logger = logging.getLogger('base')
@@ -16,6 +17,7 @@ class SRModel(BaseModel):
     def __init__(self, opt):
         super(SRModel, self).__init__(opt)
         train_opt = opt['train']
+        # self.val_lpips = opt['val_lpips']
 
         # define network and load pretrained models
         self.netG = networks.define_G(opt).to(self.device)
@@ -57,6 +59,8 @@ class SRModel(BaseModel):
             self.log_dict = OrderedDict()
         # print network
         self.print_network()
+        # if self.val_lpips:
+        #     self.cri_fea_lpips = PerceptualLoss().to(self.device)
 
     def feed_data(self, data, need_HR=True):
         self.var_L = data['LR'].to(self.device)  # LR
@@ -77,6 +81,8 @@ class SRModel(BaseModel):
         self.netG.eval()
         with torch.no_grad():
             self.fake_H = self.netG(self.var_L)
+            # if self.val_lpips:
+            #     self.LPIPS = self.cri_fea_lpips(self.fake_H, self.real_H)
         self.netG.train()
 
     def test_x8(self):
@@ -128,6 +134,8 @@ class SRModel(BaseModel):
         out_dict['SR'] = self.fake_H.detach()[0].float().cpu()
         if need_HR:
             out_dict['HR'] = self.real_H.detach()[0].float().cpu()
+            # if self.val_lpips:
+            #     out_dict['LPIPS'] = self.LPIPS.detach().float().cpu()
         return out_dict
 
     def print_network(self):

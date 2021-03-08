@@ -1,0 +1,98 @@
+{
+  "name": "RRDB_FsSRGAN_E1G16" //  please remove "debug_" during training
+  , "use_tb_logger": true
+  , "model":"FsSRGAN"
+  , "scale": 4
+  , "val_lpips": true
+  , "gpu_ids": [0,1]
+  ,
+  "datasets": {
+    "train": {
+      "name": "DIV2K"
+      , "mode": "LRHR"
+      , "dataroot_HR": "/home/yyt/DIV2K/DIV2K800/DIV2K800_sub.lmdb"
+      , "dataroot_LR": "/home/yyt/DIV2K/DIV2K800/DIV2K800_sub_x4/DIV2K800_bicLRx4.lmdb"
+      , "subset_file": null
+      , "use_shuffle": true
+      , "n_workers": 8
+      , "batch_size":32
+      , "HR_size": 192
+      , "use_flip": true
+      , "use_rot": true
+    }
+    , "val": {
+      "name": "val_set5"
+      , "mode": "LRHR"
+      , "dataroot_HR": "/home/yyt/benchmark/Set14/HR"
+      , "dataroot_LR": "/home/yyt/benchmark/Set14/LR_bicubic/X4"
+    }
+  }
+
+  , "path": {
+    "root": "/home/yyt/Python/FASRGAN-and-Fs-SRGAN-master/FASRGAN_and_Fs-SRGAN"
+    // , "resume_state": ~
+    , "pretrain_model_G": "../experiments/pretrianed_models/FsSRGAN/FsSRGAN_G.pth"
+  , "pretrain_model_E": "../experiments/pretrianed_models/FsSRGAN/FsSRGAN_E.pth"
+  }
+
+  , "network_G": {
+    "which_model_G": "RRDB_net" // RRDB_net | sr_resnet
+    , "norm_type": null
+    , "mode": "CNA"
+    , "nf": 64
+    , "nb": 16
+    , "in_nc": 3
+    , "out_nc": 3
+  }
+  , "network_D": {
+    "which_model_D": "discriminator_vgg_192_ex"
+    , "norm_type": "batch"
+    , "act_type": "leakyrelu"
+    , "mode": "CNA"
+    , "nf": 64
+    , "in_nc": 3
+  }
+  , "network_E": {
+    "which_model_G": "model_ex"
+    , "norm_type": null
+    , "mode": "CNA"
+    , "nf": 64
+    , "nb": 1
+    , "in_nc": 3
+    , "out_nc": 64
+  }
+
+  , "train": {
+    "lr_G": 1e-4
+    , "weight_decay_G": 0
+    , "beta1_G": 0.9
+    , "lr_D": 1e-4
+    , "weight_decay_D": 0
+    , "beta1_D": 0.9
+    , "lr_scheme": "MultiStepLR"
+    , "lr_steps": [50000, 100000, 200000, 300000]
+    , "lr_gamma": 0.5
+
+    , "pixel_criterion": "l1"
+    , "pixel_weight": 1e-2
+    , "feature_criterion": "l1"
+    , "feature_weight": 1
+    , "gan_type": "vanilla"
+    , "gan_weight": 5e-3
+
+    //for wgan-gp
+    // , "D_update_ratio": 1
+    // , "D_init_iters": 0
+    // , "gp_weigth": 10
+
+    , "manual_seed": 0
+    , "niter": 5e5
+    , "val_freq": 5e3
+  }
+
+  ,
+  "logger": {
+    "print_freq": 200
+    , "save_checkpoint_freq": 5e3
+  }
+}
