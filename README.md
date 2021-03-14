@@ -69,12 +69,7 @@ Download the results of our methods at [Baidu Netdisk](https://pan.baidu.com/s/1
 ## Citation
 If you find this repository useful for your research, please use the following.
 ```
-  @article{Yan2019FinegrainedAA,
-  title={Fine-grained Attention and Feature-sharing Generative Adversarial Networks for Single Image Super-Resolution},
-  author={Yitong Yan and Chuangchuang Liu and Changyou Chen and Xianfang Sun and Longcun Jin and Xiaodong Zhou},
-  journal={ArXiv},
-  year={2019},
-  volume={abs/1911.10773}
+  @ARTICLE{9377002,  author={Y. {Yan} and C. {Liu} and C. {Chen} and X. {Sun} and L. {Jin} and P. {Xinyi} and X. {Zhou}},  journal={IEEE Transactions on Multimedia},   title={Fine-grained Attention and Feature-sharing Generative Adversarial Networks for Single Image Super-Resolution},   year={2021},  volume={},  number={},  pages={1-1},  doi={10.1109/TMM.2021.3065731}}
 ```
 
 ## Acknowledgements
